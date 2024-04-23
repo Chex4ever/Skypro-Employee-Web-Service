@@ -14,7 +14,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			throw new EmployeeStorageIsFullException();
 		}
 		for (Employee employee : employees) {
-			if (employee.getName().equals(firstName) && employee.getName().equals(lastName)) {
+			if (employee.getName().equals(firstName) && employee.getSurname().equals(lastName)) {
 				throw new EmployeeAlreadyAddedException();
 			}
 		};
@@ -36,6 +36,5 @@ public class EmployeeServiceImpl implements EmployeeService{
 		};
 		throw new EmployeeNotFoundException();
 	}
-	
 	
 }
