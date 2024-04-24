@@ -11,16 +11,23 @@ public class Employee {
 		this.lastName = surname;
 	}
 
-	public String getName() { return this.firstName; }
-	public String getSurname() { return this.lastName; }
-	public void setName(String name) { this.firstName = name; }
-	public void setSurname(String surname) { this.lastName = surname;}
+	// @formatter:off
+	public String getFirstName() { return this.firstName; }
+	public String getLastName() { return this.lastName; }
+	public void setFirstName(String name) { this.firstName = name; }
+	public void setLastNamee(String surname) { this.lastName = surname;}
+	// @formatter:on
+	
 	@Override
-	public int hashCode() { return Objects.hash(lastName, firstName); }
+	public int hashCode() {
+		return Objects.hash(lastName, firstName);
+	}
+
 	@Override
 	public String toString() {
 		return "ФИО: " + this.lastName + " " + this.firstName;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
