@@ -6,13 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.logging.Logger;
+
 import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 	private final EmployeeService employeeService;
-
+	private static final Logger log = Logger.getLogger("pro.sky.exever.employeelist.EmployeeController");
 	public EmployeeController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
@@ -38,6 +42,11 @@ public class EmployeeController {
 		return employeeService.findEmployee(firstName, lastName);
 	}
 
+	@GetMapping("/all")
+	public List<Employee> showAllEmployees() {
+		return employeeService.showAllEmployees();
+	}
+
 	public static Boolean checkArgs(String firstName, String lastName) {
 		if (firstName == null || firstName.length() < 1) {
 			throw new IllegalArgumentException("Имя не задано (firstName)");
@@ -51,14 +60,7 @@ public class EmployeeController {
 	@ExceptionHandler(RuntimeException.class)
 	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
 	public String handleException(RuntimeException e) {
-		System.err.println(e.getMessage());
-		return (e.getMessage());
-	}
-	
-	@ExceptionHandler(EmployeeNotFoundException.class)
-	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
-	public String handleNotFound(EmployeeNotFoundException e) {
-		System.err.println(e.getMessage());
+		log.severe(e.getMessage());
 		return (e.getMessage());
 	}
 }
