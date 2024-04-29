@@ -25,7 +25,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "ФИО: " + this.lastName + " " + this.firstName;
+		return this.lastName + " " + this.firstName;
 	}
 
 	@Override
