@@ -1,13 +1,10 @@
 package pro.sky.exever.employeelist;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
-
 import org.springframework.stereotype.Service;
-
 import pro.sky.exever.employeelist.exception.EmployeeAlreadyAddedException;
 import pro.sky.exever.employeelist.exception.EmployeeNotFoundException;
 import pro.sky.exever.employeelist.exception.EmployeeStorageIsFullException;
@@ -35,13 +32,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee removeEmployee(String firstName, String lastName) {
 		log.info("Удаляю сотрудника " + firstName + " " + lastName);
 		Employee employee = findEmployee(firstName, lastName);
-		employees.remove(employee.toString());
-		return employee;
+		return employees.remove(employee.toString());
 	}
 
-	public List<Employee> showAllEmployees() {
+	public Collection<Employee> showAllEmployees() {
 		log.info("Список всех сотрудников");
-		return new ArrayList<Employee>(employees.values());
+		return employees.values();
 	}
 
 	public Employee findEmployee(String firstName, String lastName) {
