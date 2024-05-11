@@ -1,4 +1,4 @@
-package pro.sky.exever.employeelist;
+package pro.sky.exever.employeelist.exception;
 
 public class EmployeeAlreadyAddedException extends RuntimeException {
 	public EmployeeAlreadyAddedException() {
