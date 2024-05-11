@@ -12,10 +12,10 @@ import pro.sky.exever.employeelist.exception.EmployeeStorageIsFullException;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 	private Map<String, Employee> employees = new HashMap<>();
-	private int maxEmployeesCount = 2;
+	private int maxEmployeesCount = 10;
 	private static final Logger log = Logger.getLogger("pro.sky.exever.employeelist.EmployeeService");
 
-	public Employee addEmployee(String firstName, String lastName) {
+	public Employee addEmployee(String firstName, String lastName, int salary, int departmentId) {
 		String key = makeKey(firstName, lastName);
 		if (this.employees.size() >= maxEmployeesCount) {
 			throw new EmployeeStorageIsFullException();
@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (this.employees.containsKey(key)) {
 			throw new EmployeeAlreadyAddedException();
 		}
-		Employee employee = new Employee(firstName, lastName);
+		Employee employee = new Employee(firstName, lastName, salary, departmentId);
 		employees.put(key, employee);
 		log.info("Добавлен сотрудник" + employee.toString() + ", ключ " + key);
 		return employee;
@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employees.remove(employee.toString());
 	}
 
-	public Collection<Employee> showAllEmployees() {
+	public Collection<Employee> allEmployees() {
 		log.info("Список всех сотрудников");
 		return employees.values();
 	}

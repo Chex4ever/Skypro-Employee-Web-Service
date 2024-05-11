@@ -22,39 +22,23 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/add")
-	public Employee addEmployee(@RequestParam(required = false, name = "firstName") String firstName,
-			@RequestParam(required = false, name = "lastName") String lastName) {
-		checkArgs(firstName, lastName);
-		return employeeService.addEmployee(firstName, lastName);
+	public Employee addEmployee(@RequestParam String firstName, String lastName, int salary, int departmentId) {
+		return employeeService.addEmployee(firstName, lastName, salary, departmentId);
 	}
 
 	@GetMapping("/remove")
-	public Employee removeEmployee(@RequestParam(required = false, name = "firstName") String firstName,
-			@RequestParam(required = false, name = "lastName") String lastName) {
-		checkArgs(firstName, lastName);
+	public Employee removeEmployee(@RequestParam String firstName, String lastName) {
 		return employeeService.removeEmployee(firstName, lastName);
 	}
 
 	@GetMapping("/find")
-	public Employee findEmployee(@RequestParam(required = false, name = "firstName") String firstName,
-			@RequestParam(required = false, name = "lastName") String lastName) {
-		checkArgs(firstName, lastName);
+	public Employee findEmployee(@RequestParam String firstName, String lastName) {
 		return employeeService.findEmployee(firstName, lastName);
 	}
 
 	@GetMapping("/all")
 	public Collection<Employee> showAllEmployees() {
-		return employeeService.showAllEmployees();
-	}
-
-	public static Boolean checkArgs(String firstName, String lastName) {
-		if (firstName == null || firstName.length() < 1) {
-			throw new IllegalArgumentException("Имя не задано (firstName)");
-		}
-		if (lastName == null || lastName.length() < 1) {
-			throw new IllegalArgumentException("Фамилия не задана (lastName)");
-		}
-		return true;
+		return employeeService.allEmployees();
 	}
 
 	@ExceptionHandler(RuntimeException.class)
