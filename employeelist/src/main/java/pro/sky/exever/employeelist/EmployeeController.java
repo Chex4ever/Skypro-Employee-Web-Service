@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/all")
-	public List<Employee> showAllEmployees() {
+	public Collection<Employee> showAllEmployees() {
 		return employeeService.showAllEmployees();
 	}
 
