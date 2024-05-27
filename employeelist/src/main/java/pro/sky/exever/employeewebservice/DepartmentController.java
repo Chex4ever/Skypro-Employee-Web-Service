@@ -1,4 +1,4 @@
-package pro.sky.exever.employeelist;
+package pro.sky.exever.employeewebservice;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ import org.springframework.http.HttpStatus;
 @RequestMapping("/departments")
 public class DepartmentController {
 	private final DepartmentService departmentService;
-	private static final Logger log = Logger.getLogger("pro.sky.exever.employeelist.EmployeeController");
+	private static final Logger LOG = Logger.getLogger("DepartmentController.class");
 	public DepartmentController(DepartmentService departmentService) {
 		this.departmentService = departmentService;
 	}
@@ -47,7 +47,7 @@ public class DepartmentController {
 	@ExceptionHandler(RuntimeException.class)
 	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
 	public String handleException(RuntimeException e) {
-		log.severe(e.getMessage());
+		LOG.severe(e.getMessage());
 		return (e.getMessage());
 	}
 }

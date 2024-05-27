@@ -1,4 +1,4 @@
-package pro.sky.exever.employeelist;
+package pro.sky.exever.employeewebservice;
 
 import java.util.Comparator;
 import java.util.List;
@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import pro.sky.exever.employeelist.exception.EmployeeNotFoundException;
+import pro.sky.exever.employeewebservice.exception.EmployeeNotFoundException;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-	private EmployeeService employeeService;
+	private final EmployeeService employeeService;
 	
 	public DepartmentServiceImpl(EmployeeService employeeService) {
 		this.employeeService = employeeService;
