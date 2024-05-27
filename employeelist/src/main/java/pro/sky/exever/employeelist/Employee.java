@@ -5,17 +5,26 @@ import java.util.Objects;
 public class Employee {
 	private String lastName;
 	private String firstName;
+	private int salary;
+	private int departmentId;
 
-	public Employee(String name, String surname) {
-		this.firstName = name;
-		this.lastName = surname;
+	public Employee(String lastName, String firstName, int salary, int departmentId) {
+		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.salary = salary;
+		this.departmentId = departmentId;
 	}
 
 	// @formatter:off
 	public String getFirstName() { return this.firstName; }
-	public String getLastName() { return this.lastName; }
 	public void setFirstName(String name) { this.firstName = name; }
-	public void setLastNamee(String surname) { this.lastName = surname;}
+	public String getLastName() { return this.lastName; }
+	public void setLastName(String lastName) { this.lastName = lastName; }
+	public int getSalary() { return salary; }
+	public void setSalary(int salary) { this.salary = salary; }
+	public int getDepartmentId() { return departmentId; }
+	public void setDepartmentId(int departmentId) { this.departmentId = departmentId; }
 	// @formatter:on
 	
 	@Override
