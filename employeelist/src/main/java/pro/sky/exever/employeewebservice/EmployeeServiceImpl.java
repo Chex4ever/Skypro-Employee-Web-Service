@@ -16,10 +16,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private int maxEmployeesCount = 10;
 	private static final Logger LOG = Logger.getLogger("pro.sky.exever.employeelist.EmployeeService");
 	private final ValidationService validationService;
-	
+
 	public EmployeeServiceImpl(ValidationService validationService) {
 		this.validationService = validationService;
 	}
+
 	@Override
 	public Employee addEmployee(String firstName, String lastName, int salary, int departmentId) {
 		firstName = validationService.validateName(firstName);
@@ -31,12 +32,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (this.employees.containsKey(key)) {
 			throw new EmployeeAlreadyAddedException("%s %s".formatted(firstName, lastName));
 		}
-		
+
 		Employee employee = new Employee(firstName, lastName, salary, departmentId);
 		employees.put(key, employee);
 		LOG.info("Добавлен сотрудник %s".formatted(key));
 		return employee;
 	}
+
 	@Override
 	public Employee removeEmployee(String firstName, String lastName) {
 		firstName = validationService.validateName(firstName);
@@ -45,11 +47,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = findEmployee(firstName, lastName);
 		return employees.remove(employee.toString());
 	}
+
 	@Override
 	public Collection<Employee> allEmployees() {
 		LOG.info("Список всех сотрудников");
 		return employees.values();
 	}
+
 	@Override
 	public Employee findEmployee(String firstName, String lastName) {
 		firstName = validationService.validateName(firstName);

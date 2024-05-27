@@ -10,7 +10,7 @@ public class ValidationFailException extends RuntimeException {
 	}
 
 	public ValidationFailException(String name) {
-		super("Ошибка валидации %s".formatted(name));
+		super("Ошибка валидации: %s".formatted(name));
 	}
 
 }
