@@ -1,19 +1,20 @@
-package pro.sky.exever.employeelist;
+package pro.sky.exever.employeewebservice;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
-import pro.sky.exever.employeelist.exception.EmployeeAlreadyAddedException;
-import pro.sky.exever.employeelist.exception.EmployeeNotFoundException;
-import pro.sky.exever.employeelist.exception.EmployeeStorageIsFullException;
+
+import pro.sky.exever.employeewebservice.exception.EmployeeAlreadyAddedException;
+import pro.sky.exever.employeewebservice.exception.EmployeeNotFoundException;
+import pro.sky.exever.employeewebservice.exception.EmployeeStorageIsFullException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 	private Map<String, Employee> employees = new HashMap<>();
 	private int maxEmployeesCount = 10;
-	private static final Logger log = Logger.getLogger("pro.sky.exever.employeelist.EmployeeService");
+	private static final Logger LOG = Logger.getLogger("pro.sky.exever.employeelist.EmployeeService");
 
 	public Employee addEmployee(String firstName, String lastName, int salary, int departmentId) {
 		String key = makeKey(firstName, lastName);
@@ -25,23 +26,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		Employee employee = new Employee(firstName, lastName, salary, departmentId);
 		employees.put(key, employee);
-		log.info("Добавлен сотрудник" + employee.toString() + ", ключ " + key);
+		LOG.info("Добавлен сотрудник" + employee.toString() + ", ключ " + key);
 		return employee;
 	}
 
 	public Employee removeEmployee(String firstName, String lastName) {
-		log.info("Удаляю сотрудника " + firstName + " " + lastName);
+		LOG.info("Удаляю сотрудника " + firstName + " " + lastName);
 		Employee employee = findEmployee(firstName, lastName);
 		return employees.remove(employee.toString());
 	}
 
 	public Collection<Employee> allEmployees() {
-		log.info("Список всех сотрудников");
+		LOG.info("Список всех сотрудников");
 		return employees.values();
 	}
 
 	public Employee findEmployee(String firstName, String lastName) {
-		log.info("Ищу сотрудника " + firstName + " " + lastName);
+		LOG.info("Ищу сотрудника " + firstName + " " + lastName);
 		String key = makeKey(firstName, lastName);
 		if (!employees.containsKey(key)) {
 			throw new EmployeeNotFoundException();

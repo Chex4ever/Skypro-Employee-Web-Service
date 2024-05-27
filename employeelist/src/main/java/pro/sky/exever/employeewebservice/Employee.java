@@ -1,4 +1,4 @@
-package pro.sky.exever.employeelist;
+package pro.sky.exever.employeewebservice;
 
 import java.util.Objects;
 
@@ -9,7 +9,6 @@ public class Employee {
 	private int departmentId;
 
 	public Employee(String lastName, String firstName, int salary, int departmentId) {
-		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.salary = salary;

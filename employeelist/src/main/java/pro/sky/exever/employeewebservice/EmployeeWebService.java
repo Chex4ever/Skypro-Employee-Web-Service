@@ -1,4 +1,4 @@
-package pro.sky.exever.employeelist;
+package pro.sky.exever.employeewebservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
