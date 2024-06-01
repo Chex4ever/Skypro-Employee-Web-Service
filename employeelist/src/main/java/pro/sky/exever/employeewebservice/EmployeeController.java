@@ -1,22 +1,17 @@
 package pro.sky.exever.employeewebservice;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.logging.Logger;
-
-import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 	private final EmployeeService employeeService;
-	private static final Logger LOG = Logger.getLogger("EmployeeController.class");
+
 	public EmployeeController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
@@ -41,10 +36,4 @@ public class EmployeeController {
 		return employeeService.allEmployees();
 	}
 
-	@ExceptionHandler(RuntimeException.class)
-	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
-	public String handleException(RuntimeException e) {
-		LOG.severe(e.getMessage());
-		return (e.getMessage());
-	}
 }
