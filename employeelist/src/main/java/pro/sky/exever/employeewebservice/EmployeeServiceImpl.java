@@ -22,51 +22,54 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Employee addEmployee(String firstName, String lastName, int salary, int departmentId) {
-		firstName = validationService.validateName(firstName);
+	public Employee add(String lastName, String firstName, int salary, int departmentId) {
 		lastName = validationService.validateName(lastName);
-		String key = makeKey(firstName, lastName);
+		firstName = validationService.validateName(firstName);
+		String key = makeKey(lastName, firstName);
 		if (this.employees.size() >= maxEmployeesCount) {
+			LOG.warning("База переполнена, сотрудник не добавлен");
 			throw new EmployeeStorageIsFullException();
 		}
 		if (this.employees.containsKey(key)) {
-			throw new EmployeeAlreadyAddedException("%s %s".formatted(firstName, lastName));
+			LOG.warning("Сотрудник %s %s уже есть в базе, сотрудник не добавлен".formatted(lastName, firstName));
+			throw new EmployeeAlreadyAddedException("%s %s".formatted(lastName, firstName));
 		}
 
-		Employee employee = new Employee(firstName, lastName, salary, departmentId);
+		Employee employee = new Employee(lastName, firstName, salary, departmentId);
 		employees.put(key, employee);
 		LOG.info("Добавлен сотрудник %s".formatted(key));
 		return employee;
 	}
 
 	@Override
-	public Employee removeEmployee(String firstName, String lastName) {
-		firstName = validationService.validateName(firstName);
+	public Employee remove(String lastName, String firstName) {
 		lastName = validationService.validateName(lastName);
-		LOG.info("Удаляю сотрудника " + firstName + " " + lastName);
-		Employee employee = findEmployee(firstName, lastName);
+		firstName = validationService.validateName(firstName);
+		LOG.info("Удаляю сотрудника " + lastName + " " + firstName);
+		Employee employee = find(lastName, firstName);
 		return employees.remove(employee.toString());
 	}
 
 	@Override
-	public Collection<Employee> allEmployees() {
+	public Collection<Employee> all() {
 		LOG.info("Список всех сотрудников");
 		return employees.values();
 	}
 
 	@Override
-	public Employee findEmployee(String firstName, String lastName) {
-		firstName = validationService.validateName(firstName);
+	public Employee find(String lastName, String firstName) {
 		lastName = validationService.validateName(lastName);
-		LOG.info("Ищу сотрудника " + firstName + " " + lastName);
-		String key = makeKey(firstName, lastName);
+		firstName = validationService.validateName(firstName);
+		LOG.info("Ищу сотрудника " + lastName + " " + firstName);
+		String key = makeKey(lastName, firstName);
 		if (!employees.containsKey(key)) {
-			throw new EmployeeNotFoundException("%s %s".formatted(firstName, lastName));
+			throw new EmployeeNotFoundException("%s %s".formatted(lastName, firstName));
 		}
 		return employees.get(key);
 	}
 
-	private String makeKey(String firstName, String lastName) {
-		return firstName + " " + lastName;
+	private String makeKey(String lastName, String firstName) {
+		return lastName + " " + firstName;
 	}
+
 }

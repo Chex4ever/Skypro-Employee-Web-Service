@@ -45,6 +45,6 @@ public class Employee {
 			return false;
 		}
 		Employee other = (Employee) obj;
-		return Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName);
+		return Objects.equals(lastName, other.lastName) && Objects.equals(firstName, other.firstName);
 	}
 }
